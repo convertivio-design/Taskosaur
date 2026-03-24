@@ -17,11 +17,13 @@ import { TimeEntriesSeederService } from './time-entries.seeder.service';
 import { AdminSeederService } from './admin-seeder.service';
 import { InboxRulesSeederService } from './inbox-rules.seeder.service';
 import { EmailTemplatesService } from './email-templates.service';
+import { MarketingDemoSeederService } from './marketing-demo.seeder.service';
 
 @Module({
   imports: [PrismaModule],
   providers: [
     SeederService,
+    MarketingDemoSeederService,
     UsersSeederService,
     OrganizationsSeederService,
     WorkspacesSeederService,

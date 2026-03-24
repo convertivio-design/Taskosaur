@@ -1,48 +1,48 @@
 {
-  "title": "Sprint Management",
+  "title": "Campaign Phase Management",
   "description": "Organize your work into focused iterations and track progress effectively.",
-  "createSprint": "Create Sprint",
+  "createSprint": "Create Campaign Phase",
   "noSprints": {
-    "title": "No sprints yet",
-    "description": "Create your first sprint to start organizing your work into focused iterations."
+    "title": "No campaign phases yet",
+    "description": "Create your first campaign phase to start organizing your work into focused iterations."
   },
   "deleteSprint": {
-    "title": "Delete Sprint",
-    "message": "Are you sure you want to delete the sprint \"{{name}}\"? This action cannot be undone.",
+    "title": "Delete Campaign Phase",
+    "message": "Are you sure you want to delete the campaign phase \"{{name}}\"? This action cannot be undone.",
     "confirm": "Delete",
     "deleting": "Deleting...",
     "cancel": "Cancel"
   },
   "errors": {
     "workspaceNotFound": "Workspace not found",
-    "projectNotFound": "Project not found",
-    "loadingProjectError": "Error loading project data",
+    "projectNotFound": "Campaign not found",
+    "loadingProjectError": "Error loading campaign data",
     "loadingPageError": "Error loading page data",
-    "fetchingProjectError": "Error fetching project data",
-    "fetchTasksFailed": "Failed to fetch tasks"
+    "fetchingProjectError": "Error fetching campaign data",
+    "fetchTasksFailed": "Failed to fetch leads"
   },
   "sprintTasks": {
-    "title": "Sprint Tasks",
-    "description": "Manage and track all tasks in this sprint. {{total}} total tasks",
-    "searchPlaceholder": "Search tasks..."
+    "title": "Phase Leads",
+    "description": "Manage and track all leads in this campaign phase. {{total}} total leads",
+    "searchPlaceholder": "Search leads..."
   },
   "card": {
     "noDates": "No dates set",
     "days": "{{count}} days",
-    "completeSprint": "Complete Sprint",
-    "editSprint": "Edit Sprint",
-    "deleteSprint": "Delete Sprint"
+    "completeSprint": "Complete Campaign Phase",
+    "editSprint": "Edit Campaign Phase",
+    "deleteSprint": "Delete Campaign Phase"
   },
   "form": {
-    "editTitle": "Edit Sprint",
-    "createTitle": "Create new sprint",
-    "editDescription": "Update sprint details and timeline",
-    "createDescription": "Create a new sprint to organize your work into focused iterations",
-    "nameLabel": "Sprint name",
-    "namePlaceholder": "Enter sprint name",
-    "goalLabel": "Sprint goal",
-    "goalPlaceholder": "Describe the main objective and outcomes for this sprint...",
-    "goalHint": "Help your team understand the sprint's focus and expected outcomes.",
+    "editTitle": "Edit Campaign Phase",
+    "createTitle": "Create new campaign phase",
+    "editDescription": "Update campaign phase details and timeline",
+    "createDescription": "Create a new campaign phase to organize your work into focused iterations",
+    "nameLabel": "Campaign phase name",
+    "namePlaceholder": "Enter campaign phase name",
+    "goalLabel": "Campaign phase goal",
+    "goalPlaceholder": "Describe the main objective and outcomes for this campaign phase...",
+    "goalHint": "Help your team understand the campaign phase's focus and expected outcomes.",
     "statusLabel": "Status",
     "statusPlaceholder": "Select status",
     "startDateLabel": "Start date",
@@ -51,7 +51,7 @@
     "update": "Update",
     "create": "Create",
     "updating": "Updating...",
-    "creating": "Creating sprint...",
+    "creating": "Creating campaign phase...",
     "statuses": {
       "planning": "Planning",
       "active": "Active",
@@ -59,7 +59,7 @@
       "cancelled": "Cancelled"
     },
     "validation": {
-      "nameRequired": "Sprint name is required",
+      "nameRequired": "Campaign phase name is required",
       "startDateRequired": "Start date is required",
       "endDateRequired": "End date is required",
       "endDateAfterStart": "End date must be after start date"
@@ -68,73 +68,73 @@
   "board": {
     "loading": "Loading...",
     "invalidDate": "Invalid date",
-    "noSprintSelected": "No Sprint Selected",
-    "selectSprintToView": "Please select a sprint to view the board",
-    "noSprintSelectedSubtitle": "Please select a sprint from the dropdown above to view progress.",
-    "tasks": "tasks",
+    "noSprintSelected": "No Campaign Phase Selected",
+    "selectSprintToView": "Please select a campaign phase to view the board",
+    "noSprintSelectedSubtitle": "Please select a campaign phase from the dropdown above to view progress.",
+    "tasks": "leads",
     "points": "points",
-    "startSprint": "Start Sprint",
-    "completeSprint": "Complete Sprint",
-    "tasksCompleted": "Tasks Completed",
+    "startSprint": "Start Campaign Phase",
+    "completeSprint": "Complete Campaign Phase",
+    "tasksCompleted": "Leads Completed",
     "storyPoints": "Story Points",
     "completionRate": "Completion Rate",
     "statuses": {
-      "sprintBacklog": "Sprint Backlog",
+      "sprintBacklog": "Phase Backlog",
       "inProgress": "In Progress",
       "testing": "Testing",
       "done": "Done"
     }
   },
   "selector": {
-    "noActiveSprint": "No Active Sprint",
-    "noSprintsAvailable": "No sprints available",
-    "createFirstSprint": "Create your first sprint"
+    "noActiveSprint": "No Active Campaign Phase",
+    "noSprintsAvailable": "No campaign phases available",
+    "createFirstSprint": "Create your first campaign phase"
   },
   "progress": {
-    "title": "Sprint Progress",
-    "timeline": "Sprint Timeline",
+    "title": "Campaign Phase Progress",
+    "timeline": "Campaign Phase Timeline",
     "daysRemaining": "{{count}} days remaining",
-    "sprintEnded": "Sprint ended",
+    "sprintEnded": "Campaign phase ended",
     "complete": "complete",
     "timeSpent": "Time Spent",
     "estimated": "estimated",
-    "tasksComplete": "Tasks Complete",
+    "tasksComplete": "Leads Complete",
     "inProgress": "in progress",
     "velocity": "Velocity",
     "storyPointsPerDay": "Story points per day",
     "capacity": "Capacity",
-    "burndown": "Sprint Burndown",
+    "burndown": "Campaign Phase Burndown",
     "burndownPlaceholder": "Burndown chart will be implemented here",
     "quickActions": "Quick Actions",
-    "viewReport": "View Sprint Report",
+    "viewReport": "View Campaign Phase Report",
     "exportData": "Export Data"
   },
   "planning": {
-    "title": "Sprint Planning",
-    "selectSprint": "Select a sprint",
-    "selectSprintToPlan": "Please select a sprint from the dropdown above to start planning.",
+    "title": "Campaign Phase Planning",
+    "selectSprint": "Select a campaign phase",
+    "selectSprintToPlan": "Please select a campaign phase from the dropdown above to start planning.",
     "saveChanges": "Save Changes",
-    "startSprint": "Start Sprint",
-    "goal": "Sprint Goal",
+    "startSprint": "Start Campaign Phase",
+    "goal": "Campaign Phase Goal",
     "noGoal": "No goal set",
     "duration": "Duration",
     "noDates": "No dates set",
     "capacity": "Capacity",
     "hours": "hours",
     "productBacklog": "Product Backlog",
-    "tasks": "tasks",
+    "tasks": "leads",
     "sp": "SP",
-    "noTasksInBacklog": "No tasks in backlog",
-    "sprintBacklog": "Sprint Backlog",
-    "dragTasksHere": "Drag tasks here to add to sprint",
-    "clickToMove": "Click tasks to move them between backlog and sprint",
-    "summary": "Sprint Summary",
+    "noTasksInBacklog": "No leads in backlog",
+    "sprintBacklog": "Phase Backlog",
+    "dragTasksHere": "Drag leads here to add to campaign phase",
+    "clickToMove": "Click leads to move them between backlog and campaign phase",
+    "summary": "Campaign Phase Summary",
     "estimatedTime": "Estimated Time"
   },
   "tasksPanel": {
-    "title": "Sprint Tasks",
-    "tasks": "tasks",
+    "title": "Phase Leads",
+    "tasks": "leads",
     "errorNoOrg": "No organization selected. Please select an organization first.",
-    "fetchFailed": "Failed to fetch tasks"
+    "fetchFailed": "Failed to fetch leads"
   }
 }

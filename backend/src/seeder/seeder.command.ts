@@ -1,10 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { SeederModule } from './seeder.module';
 import { SeederService } from './seeder.service';
+import { MarketingDemoSeederService } from './marketing-demo.seeder.service';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(SeederModule);
   const seederService = app.get(SeederService);
+  const marketingDemoSeeder = app.get(MarketingDemoSeederService);
 
   const command = process.argv[2] || 'seed'; // Default to 'seed' if no argument
 
@@ -36,6 +38,12 @@ async function bootstrap() {
         console.log('\n🎉 Core modules reset completed successfully!');
         break;
 
+      case 'marketing':
+        console.log('🚀 Starting marketing demo seeding (idempotent)...\n');
+        await marketingDemoSeeder.seed();
+        console.log('\n🎉 Marketing demo seeding completed successfully!');
+        break;
+
       default:
         console.log(`
 🌱 Seeder Commands:
@@ -44,6 +52,7 @@ async function bootstrap() {
   npm run seed:admin        - Seed admin user only (idempotent - safe to run multiple times)
   npm run seed:clear        - Clear all core modules data
   npm run seed:reset        - Clear and re-seed core modules
+  npm run seed:marketing    - Seed marketing automation demo data (idempotent)
 
 All seed commands are idempotent and safe to run multiple times.
         `);
