@@ -6,4 +6,4 @@ if [ -n "$REDIS_URL" ]; then
   export REDIS_PASSWORD=$(echo "$REDIS_URL" | sed -E 's|redis://:?([^@]*)@.*|\1|')
 fi
 
-npm run prisma:migrate:deploy && (npm run seed:marketing || true) && npm run start:prod
+npm run prisma:migrate:deploy && (NODE_OPTIONS='--max-old-space-size=400' npm run seed:marketing || true) && npm run start:prod
