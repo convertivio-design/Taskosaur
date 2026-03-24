@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: taskosaur-backend
+    env: node
+    region: oregon
+    plan: free
+    branch: marketing-demo
+    rootDir: backend
+    buildCommand: npm install && npm run prisma:generate && npm run build
+    startCommand: npm run prisma:migrate:deploy && (npm run seed:marketing || true) && npm run start:prod
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        value: 5cP0Lxc+k0S4vKigOH+OgN00lVzhtv5UH5Sxqqr4544=
+      - key: JWT_REFRESH_SECRET
+        value: t50MYv1fcocVgdBr3n3GZBXJEuXDAWY+f3e0RLmKxzc=
+      - key: ENCRYPTION_KEY
+        value: f19fdb8e97e6979a937064476845f26704449898910039df09f072d831acbb73
+      - key: FRONTEND_URL
+        value: https://taskosaur-marketing-demo.vercel.app
+      - key: CORS_ORIGIN
+        value: https://taskosaur-marketing-demo.vercel.app
+      - key: DATABASE_URL
+        fromDatabase:
+          name: taskosaur-db
+          property: connectionString
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: taskosaur-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: taskosaur-redis
+          property: port
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: taskosaur-redis
+          property: password
+
+  - type: redis
+    name: taskosaur-redis
+    plan: free
+    maxmemoryPolicy: noeviction
+
+databases:
+  - name: taskosaur-db
+    plan: free
+    databaseName: taskosaur
+    user: taskosaur
