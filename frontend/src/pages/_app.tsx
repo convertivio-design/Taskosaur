@@ -24,19 +24,26 @@ function useExposeRouter() {
 export default function MyApp({ Component, pageProps }: AppProps) {
   // Expose router globally for automation to use
   useExposeRouter();
+  const router = useRouter();
+  const isLanding = router.pathname === "/";
+
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <SEO />
-      <AuthProvider>
-        <SetupChecker>
-          <ChatProvider>
-            <ProtectedRoute>
-              <Component {...pageProps} />
-            </ProtectedRoute>
-            <ChatPanel />
-          </ChatProvider>
-        </SetupChecker>
-      </AuthProvider>
+      {isLanding ? (
+        <Component {...pageProps} />
+      ) : (
+        <AuthProvider>
+          <SetupChecker>
+            <ChatProvider>
+              <ProtectedRoute>
+                <Component {...pageProps} />
+              </ProtectedRoute>
+              <ChatPanel />
+            </ChatProvider>
+          </SetupChecker>
+        </AuthProvider>
+      )}
       <Toaster expand={false} richColors closeButton />
     </ThemeProvider>
   );
