@@ -61,7 +61,7 @@
         "docker:push:stable": "docker buildx build --platform linux/amd64,linux/arm64 -f Dockerfile.prod --build-arg BUILD_NUMBER=$(git rev-parse --short HEAD 2>/dev/null || date +%Y%m%d%H%M%S) -t taskosaur/taskosaur:latest -t taskosaur/taskosaur:$(node -p \"require('./package.json').version\") -t taskosaur/taskosaur:$(node -p \"require('./package.json').version\")-$(git rev-parse --short HEAD 2>/dev/null || date +%Y%m%d%H%M%S) --push .",
         "generate:logo:icons": "node scripts/generate-logo-icons.js",
         "postinstall": "node scripts/postinstall.js",
-        "prepare": "husky"
+        "prepare": "husky || true"
     },
     "keywords": [],
     "devDependencies": {
