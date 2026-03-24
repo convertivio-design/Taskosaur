@@ -158,7 +158,7 @@ export default function LandingPage() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <button
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/login?demo=true")}
             className="group relative inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/40 transition-all hover:bg-violet-500 hover:shadow-violet-800/60 hover:-translate-y-0.5 active:translate-y-0"
           >
             Enter Demo
@@ -176,6 +176,16 @@ export default function LandingPage() {
             View Source on GitHub
           </a>
         </motion.div>
+
+        {/* Demo credentials hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-4 text-xs text-gray-600 text-center"
+        >
+          Demo login: <span className="text-gray-400 font-mono">demo@convertivio.io</span> &nbsp;/&nbsp; <span className="text-gray-400 font-mono">Demo1234!</span>
+        </motion.p>
 
         {/* Kanban Pipeline Preview */}
         <motion.div
