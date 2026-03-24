@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -30,6 +30,21 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isDemo, setIsDemo] = useState(false);
+
+  useEffect(() => {
+    if (router.query.demo === "true") {
+      setIsDemo(true);
+      setIsLoading(true);
+      login({ email: "demo@convertivio.io", password: "Demo1234!" })
+        .then(() => router.push("/dashboard"))
+        .catch(() => {
+          // Backend not running yet — fall back to pre-filled form
+          setFormData({ email: "demo@convertivio.io", password: "Demo1234!", rememberMe: false });
+          setIsLoading(false);
+        });
+    }
+  }, [router.query.demo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +113,13 @@ export function LoginForm() {
           <p className="login-form-subtitle">Login to continue your productive journey</p>
         </div>
       </div>
+
+      {/* Demo banner */}
+      {isDemo && (
+        <div className="mb-4 rounded-lg border border-violet-700/50 bg-violet-950/40 px-4 py-3 text-center text-xs text-violet-300">
+          <span className="font-semibold text-violet-200">Demo mode</span> — credentials pre-filled. Just click Log In.
+        </div>
+      )}
 
       {/* Error Alert */}
       {error && (
