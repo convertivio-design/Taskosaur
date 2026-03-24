@@ -5,9 +5,8 @@ services:
     region: oregon
     plan: free
     branch: marketing-demo
-    rootDir: backend
-    buildCommand: npm install && npm run prisma:generate && npm run build
-    startCommand: bash start-render.sh
+    buildCommand: cd backend && npm install && npm run prisma:generate && npm run build
+    startCommand: cd backend && bash start-render.sh
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
