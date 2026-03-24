@@ -7,7 +7,7 @@ services:
     branch: marketing-demo
     rootDir: backend
     buildCommand: npm install && npm run prisma:generate && npm run build
-    startCommand: npm run prisma:migrate:deploy && (npm run seed:marketing || true) && npm run start:prod
+    startCommand: bash start-render.sh
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
@@ -28,26 +28,17 @@ services:
         fromDatabase:
           name: taskosaur-db
           property: connectionString
-      - key: REDIS_HOST
+      - key: REDIS_URL
         fromService:
           type: redis
           name: taskosaur-redis
-          property: host
-      - key: REDIS_PORT
-        fromService:
-          type: redis
-          name: taskosaur-redis
-          property: port
-      - key: REDIS_PASSWORD
-        fromService:
-          type: redis
-          name: taskosaur-redis
-          property: password
+          property: connectionString
 
   - type: redis
     name: taskosaur-redis
     plan: free
     maxmemoryPolicy: noeviction
+    ipAllowList: []
 
 databases:
   - name: taskosaur-db
