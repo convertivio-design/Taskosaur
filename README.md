@@ -17,13 +17,11 @@ This is a working, full-stack application reframed as a marketing automation pla
 ## Screenshots
 
 ### Landing Page
-![Landing page with AI pipeline preview](./assets/screenshots/landing.png)
+![Landing page](./assets/screenshots/landing.png)
+![Landing page continued](./assets/screenshots/landing2.png)
 
 ### Lead Pipeline (Kanban)
 ![Campaign pipeline board with lead scoring](./assets/screenshots/pipeline.png)
-
-### Campaign Dashboard
-![Campaign overview with metrics](./assets/screenshots/dashboard.png)
 
 ### AI Assistant
 ![Conversational AI automating lead workflows](./assets/screenshots/ai-assistant.png)
