@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { authApi } from "@/utils/api/authApi";
 
 const PIPELINE_STAGES = [
   {
@@ -104,6 +106,24 @@ function RobotIcon() {
 
 export default function LandingPage() {
   const router = useRouter();
+  const [demoState, setDemoState] = useState<"idle" | "loading" | "error">("idle");
+  const [demoAttempt, setDemoAttempt] = useState(0);
+
+  const handleEnterDemo = async () => {
+    setDemoState("loading");
+    try {
+      await authApi.login({ email: "demo@convertivio.io", password: "Demo1234!" });
+      router.push("/dashboard");
+    } catch {
+      if (demoAttempt === 0) {
+        // Backend cold-starting — retry once after a brief pause
+        setDemoAttempt(1);
+        setTimeout(handleEnterDemo, 4000);
+      } else {
+        setDemoState("error");
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-x-hidden">
@@ -158,11 +178,24 @@ export default function LandingPage() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <button
-            onClick={() => router.push("/login?demo=true")}
-            className="group relative inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/40 transition-all hover:bg-violet-500 hover:shadow-violet-800/60 hover:-translate-y-0.5 active:translate-y-0"
+            onClick={handleEnterDemo}
+            disabled={demoState === "loading"}
+            className="group relative inline-flex items-center gap-2 rounded-xl bg-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/40 transition-all hover:bg-violet-500 hover:shadow-violet-800/60 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
-            Enter Demo
-            <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+            {demoState === "loading" ? (
+              <>
+                <svg className="animate-spin h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                </svg>
+                {demoAttempt > 0 ? "Waking server up…" : "Signing in…"}
+              </>
+            ) : (
+              <>
+                Enter Demo
+                <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+              </>
+            )}
           </button>
           <a
             href="https://github.com/convertivio-design/Taskosaur"
@@ -173,19 +206,26 @@ export default function LandingPage() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="opacity-70">
               <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.607.069-.607 1.003.07 1.531 1.031 1.531 1.031.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
             </svg>
-            View Source on GitHub
+            View on GitHub
           </a>
         </motion.div>
 
-        {/* Demo credentials hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-4 text-xs text-gray-600 text-center"
-        >
-          Demo login: <span className="text-gray-400 font-mono">demo@convertivio.io</span> &nbsp;/&nbsp; <span className="text-gray-400 font-mono">Demo1234!</span>
-        </motion.p>
+        {/* Error state */}
+        {demoState === "error" && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-4 text-xs text-red-400 text-center"
+          >
+            Server is starting up — please try again in 30 seconds.{" "}
+            <button
+              onClick={() => { setDemoState("idle"); setDemoAttempt(0); }}
+              className="underline hover:text-red-300"
+            >
+              Retry
+            </button>
+          </motion.p>
+        )}
 
         {/* Kanban Pipeline Preview */}
         <motion.div
